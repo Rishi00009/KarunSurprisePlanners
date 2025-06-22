@@ -15,7 +15,6 @@ function App() {
       {/* Main Content Sections with IDs for navigation */}
       <section id="home">
         <Banner />
-        {/* Home content goes here */}
       </section>
       
       <section id="about" className="py-16">

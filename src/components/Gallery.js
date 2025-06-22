@@ -52,9 +52,29 @@ const Gallery = () => {
     }
   ];
 
+  const instagramVideos = [
+    {
+      id: 1,
+      title: 'Birthday Party',
+      url: 'https://www.instagram.com/reel/C79PUDkSBlB',
+      emoji: '🎉',
+      thumbnail: '/images/birthday-party-thumbnail.jpg' // Replace with your actual image path
+    },
+    {
+      id: 2,
+      title: 'Birthday Celebration',
+      url: 'https://www.instagram.com/reel/C8du54ASDRu',
+      emoji: '🎂',
+      thumbnail: '/images/birthday-celebration-thumbnail.jpg' // Replace with your actual image path
+    }
+  ];
+
+  const handleVideoClick = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section id="gallery" className="py-16 bg-rose-200 from-pink-50 to-white">
-      {/* Container with margin and rounded corners */}
+    <section id="gallery" className="py-16 bg-gradient-to-b from-pink-50 to-white">
       <div className="mx-4 sm:mx-6 lg:mx-8 xl:mx-10 2xl:mx-12 bg-white rounded-3xl shadow-lg overflow-hidden">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-8">
           {/* Section Header */}
@@ -116,6 +136,53 @@ const Gallery = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Instagram Videos Section */}
+          <div className="mt-16">
+            <h3 className="text-3xl font-bold text-pink-600 mb-8 text-center">
+              Video Highlights
+              <span className="block w-16 h-1 bg-pink-400 rounded-full mx-auto mt-2"></span>
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {instagramVideos.map((video) => (
+                <div 
+                  key={video.id} 
+                  className="bg-gray-50 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => handleVideoClick(video.url)}
+                >
+                  <div className="relative group">
+                    {/* Video Thumbnail with Play Button */}
+                    <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+                      <img 
+                        src={video.thumbnail} 
+                        alt={video.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center transition-opacity">
+                        <div className="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex items-center">
+                      <span className="text-2xl mr-3">{video.emoji}</span>
+                      <h4 className="text-xl font-semibold text-gray-800">{video.title}</h4>
+                    </div>
+                    <div className="mt-3 inline-flex items-center text-pink-600">
+                      Watch on Instagram
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* View All Button */}
