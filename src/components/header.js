@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
+// Import your logo image (adjust the path as needed)
+import logo from './images/logo.png'; // Update this path
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,26 +20,37 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-pink-600 to-pink-500 text-white shadow-lg sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-pink-400 to-pink-500 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex justify-between items-center">
-          {/* Logo & Branding */}
+          {/* Logo & Branding with Image */}
           <div className="flex items-center">
-            <h1 className="text-xl sm:text-2xl font-bold">
-              <a 
-                href="#home" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleScroll('home');
-                }} 
-                className="hover:text-yellow-200 transition duration-200"
-              >
-                Karur Surprise Planners
-              </a>
-            </h1>
-            <p className="hidden sm:block ml-3 text-sm italic text-pink-200">
-              We create magical moments!
-            </p>
+            <div className="flex items-center">
+              {/* Logo Image */}
+              <img 
+                src={logo} 
+                alt="Karur Surprise Planners Logo" 
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover border-2 border-white mr-3"
+              />
+              {/* Brand Text */}
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold">
+                  <a 
+                    href="#home" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleScroll('home');
+                    }} 
+                    className="hover:text-yellow-200 transition duration-200 flex items-center"
+                  >
+                    Karur Surprise Planners
+                  </a>
+                </h1>
+                <p className="hidden sm:block text-sm italic text-pink-200">
+                  We create magical moments!
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

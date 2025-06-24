@@ -1,197 +1,154 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// Import images
+import Dec1 from '../components/images/Baloon Dec/Dec (1).jpg';
+import Dec2 from '../components/images/Baloon Dec/Dec (2).jpg';
+import Dec3 from '../components/images/Baloon Dec/Dec (3).jpg';
+import Dec4 from '../components/images/Baloon Dec/Dec (4).jpg';
+import Dec5 from '../components/images/Baloon Dec/Dec (5).jpg';
+import Dec6 from '../components/images/Baloon Dec/Dec (6).jpg';
+import Dec7 from '../components/images/Baloon Dec/Dec (7).jpg';
+import Dec8 from '../components/images/Baloon Dec/Dec (8).jpg';
+import Dec9 from '../components/images/Baloon Dec/Dec (9).jpg';
+import Dec10 from '../components/images/Baloon Dec/Dec (10).jpg';
+import Dec11 from '../components/images/Baloon Dec/Dec (11).jpg';
+import Dec12 from '../components/images/Baloon Dec/Dec (12).jpg';
+import Dec13 from '../components/images/Baloon Dec/Dec (13).JPG';
 
 const Gallery = () => {
-  const galleryItems = [
-    {
-      id: 1,
-      title: 'Princess Theme Event',
-      date: 'Feb 2024',
-      description: 'A magical princess celebration with royal decorations and enchanting surprises.',
-      emoji: '👑',
-      bgGradient: 'from-purple-200 to-pink-300'
-    },
-    {
-      id: 2,
-      title: 'Simple Elegant Setup',
-      date: 'May 2025',
-      description: 'Elegant and minimalist birthday setup with beautiful balloon arrangements.',
-      emoji: '🎈',
-      bgGradient: 'from-blue-100 to-purple-200'
-    },
-    {
-      id: 3,
-      title: 'Superhero Party',
-      date: 'Mar 2024',
-      description: 'Action-packed superhero birthday with dynamic decorations and fun activities.',
-      emoji: '🦸',
-      bgGradient: 'from-red-100 to-yellow-200'
-    },
-    {
-      id: 4,
-      title: 'Unicorn Fantasy',
-      date: 'Jun 2024',
-      description: 'Rainbows, glitter and magical unicorns for a dreamy celebration.',
-      emoji: '🦄',
-      bgGradient: 'from-indigo-200 to-pink-300'
-    },
-    {
-      id: 5,
-      title: 'Dinosaur Adventure',
-      date: 'Sep 2024',
-      description: 'Prehistoric fun with dinosaur decorations and fossil hunting activities.',
-      emoji: '🦖',
-      bgGradient: 'from-green-200 to-teal-300'
-    },
-    {
-      id: 6,
-      title: 'Space Explorer',
-      date: 'Nov 2024',
-      description: 'Blast off to an interstellar party with planets, rockets and stars.',
-      emoji: '🚀',
-      bgGradient: 'from-blue-200 to-indigo-400'
-    }
+  const balloonImages = [
+    { id: 1, title: 'Elegant Arch', category: 'Birthday', img: Dec1 },
+    { id: 2, title: 'Rainbow Theme', category: 'Kids Party', img: Dec2 },
+    { id: 3, title: 'Golden Decor', category: 'Anniversary', img: Dec3 },
+    { id: 4, title: 'Princess Setup', category: 'Birthday', img: Dec4 },
+    { id: 5, title: 'Organic Garland', category: 'Baby Shower', img: Dec5 },
+    { id: 6, title: 'Number Display', category: 'Birthday', img: Dec6 },
+    { id: 7, title: 'Floral Balloons', category: 'Wedding', img: Dec7 },
+    { id: 8, title: 'Themed Backdrop', category: 'Birthday', img: Dec8 },
+    { id: 9, title: 'Ceiling Decor', category: 'Corporate', img: Dec9 },
+    { id: 10, title: 'Balloon Wall', category: 'Photoshoot', img: Dec10 },
+    { id: 11, title: 'Custom Sculpture', category: 'Special Event', img: Dec11 },
+    { id: 12, title: 'Floating Centerpiece', category: 'Wedding', img: Dec12 },
+    { id: 13, title: 'Theme Package', category: 'Birthday', img: Dec13 }
   ];
 
-  const instagramVideos = [
-    {
-      id: 1,
-      title: 'Birthday Party',
-      url: 'https://www.instagram.com/reel/C79PUDkSBlB',
-      emoji: '🎉',
-      thumbnail: '/images/birthday-party-thumbnail.jpg' // Replace with your actual image path
-    },
-    {
-      id: 2,
-      title: 'Birthday Celebration',
-      url: 'https://www.instagram.com/reel/C8du54ASDRu',
-      emoji: '🎂',
-      thumbnail: '/images/birthday-celebration-thumbnail.jpg' // Replace with your actual image path
-    }
-  ];
+  const [filteredImages, setFilteredImages] = useState(balloonImages);
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [showAll, setShowAll] = useState(false);
 
-  const handleVideoClick = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+  // Determine which images to display
+  const displayedImages = showAll ? filteredImages : filteredImages.slice(0, 6);
+
+  const filterImages = (category) => {
+    setActiveFilter(category);
+    if (category === 'All') {
+      setFilteredImages(balloonImages);
+    } else {
+      setFilteredImages(balloonImages.filter(image => image.category === category));
+    }
+    // Reset to showing only 6 when changing filters
+    setShowAll(false);
+  };
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
   };
 
   return (
-    <section id="gallery" className="py-16 bg-gradient-to-b from-pink-50 to-white">
-      <div className="mx-4 sm:mx-6 lg:mx-8 xl:mx-10 2xl:mx-12 bg-white rounded-3xl shadow-lg overflow-hidden">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-pink-600 mb-4 relative inline-block">
-              Our Gallery
-              <span className="absolute -bottom-2 left-0 right-0 mx-auto w-16 h-1 bg-pink-400 rounded-full"></span>
-              <span className="absolute -bottom-4 left-0 right-0 mx-auto w-12 h-1 bg-pink-300 rounded-full opacity-70"></span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our magical birthday setups that brought joy to countless celebrations
-            </p>
-          </div>
+    <section id="gallery" className="py-12 bg-gradient-to-b from-pink-50 to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-pink-600 mb-4">Balloon Decor Gallery</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore our stunning balloon decoration work in Karur
+          </p>
+          <div className="w-20 h-1 bg-pink-400 mx-auto mt-4 rounded-full"></div>
+        </div>
 
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-0">
-            {galleryItems.map((item) => (
-              <div 
-                key={item.id}
-                className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-pink-100 hover:border-pink-200 relative"
-              >
-                {/* Image Placeholder with Gradient */}
-                <div className={`bg-gradient-to-br ${item.bgGradient} h-64 flex items-center justify-center relative overflow-hidden`}>
-                  <span className="text-7xl z-10 group-hover:scale-110 transition-transform duration-500">
-                    {item.emoji}
-                  </span>
-                  {/* Decorative elements */}
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white"></div>
-                    <div className="absolute bottom-8 right-6 w-12 h-12 rounded-full bg-white"></div>
-                    <div className="absolute top-1/2 left-1/4 w-6 h-6 rounded-full bg-white"></div>
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-6 relative">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-pink-600 transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <span className="text-sm bg-pink-100 text-pink-600 px-3 py-1 rounded-full whitespace-nowrap">
-                      {item.date}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
-                  
-                  {/* View More Button */}
-                  <button className="text-pink-600 font-medium flex items-center group-hover:underline">
-                    View more photos
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  
-                  {/* Corner decoration */}
-                  <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
-                    <div className="absolute -right-8 -top-8 w-16 h-16 bg-pink-100 transform rotate-45"></div>
-                  </div>
+        {/* Category Filter */}
+        <div className="flex justify-center mb-8 flex-wrap gap-2">
+          <button 
+            onClick={() => filterImages('All')}
+            className={`px-4 py-2 rounded-full font-medium transition ${
+              activeFilter === 'All' ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+            }`}
+          >
+            All
+          </button>
+          <button 
+            onClick={() => filterImages('Birthday')}
+            className={`px-4 py-2 rounded-full font-medium transition ${
+              activeFilter === 'Birthday' ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+            }`}
+          >
+            Birthday
+          </button>
+          <button 
+            onClick={() => filterImages('Wedding')}
+            className={`px-4 py-2 rounded-full font-medium transition ${
+              activeFilter === 'Wedding' ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+            }`}
+          >
+            Wedding
+          </button>
+          <button 
+            onClick={() => filterImages('Baby Shower')}
+            className={`px-4 py-2 rounded-full font-medium transition ${
+              activeFilter === 'Baby Shower' ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+            }`}
+          >
+            Baby Shower
+          </button>
+          <button 
+            onClick={() => filterImages('Corporate')}
+            className={`px-4 py-2 rounded-full font-medium transition ${
+              activeFilter === 'Corporate' ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 hover:bg-pink-100'
+            }`}
+          >
+            Corporate
+          </button>
+        </div>
+
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {displayedImages.map((image) => (
+            <div 
+              key={image.id} 
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              {/* Image */}
+              <div className="aspect-w-1 aspect-h-1 bg-gray-100">
+                <img
+                  src={image.img}
+                  alt={image.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <div className="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-bold text-lg">{image.title}</h3>
+                  <p className="text-sm text-pink-200">{image.category}</p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Instagram Videos Section */}
-          <div className="mt-16">
-            <h3 className="text-3xl font-bold text-pink-600 mb-8 text-center">
-              Video Highlights
-              <span className="block w-16 h-1 bg-pink-400 rounded-full mx-auto mt-2"></span>
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {instagramVideos.map((video) => (
-                <div 
-                  key={video.id} 
-                  className="bg-gray-50 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => handleVideoClick(video.url)}
-                >
-                  <div className="relative group">
-                    {/* Video Thumbnail with Play Button */}
-                    <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
-                      <img 
-                        src={video.thumbnail} 
-                        alt={video.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center transition-opacity">
-                        <div className="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 flex items-center">
-                      <span className="text-2xl mr-3">{video.emoji}</span>
-                      <h4 className="text-xl font-semibold text-gray-800">{video.title}</h4>
-                    </div>
-                    <div className="mt-3 inline-flex items-center text-pink-600">
-                      Watch on Instagram
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* View All Button */}
-          <div className="text-center mt-12">
-            <button className="px-8 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white font-medium rounded-full shadow-lg hover:shadow-xl hover:from-pink-600 hover:to-pink-700 transition-all duration-300 transform hover:-translate-y-1">
-              View All Events
+        {/* View More Button - Only show if there are more images to show */}
+        {filteredImages.length > 6 && (
+          <div className="text-center mt-10">
+            <button 
+              onClick={toggleShowAll}
+              className="px-6 py-3 bg-pink-600 text-white font-medium rounded-full hover:bg-pink-700 transition shadow-lg hover:shadow-xl"
+            >
+              {showAll ? 'Show Less' : 'View More Decorations'}
             </button>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

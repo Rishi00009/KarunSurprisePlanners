@@ -1,9 +1,9 @@
 import React from 'react';
+import FounderImage from '../images/Founder.jpeg'; // Update path if needed
 
 const About = () => {
   return (
     <section id="about" className="py-12 md:py-16 lg:py-20">
-      {/* Background container with responsive margins */}
       <div className="bg-gradient-to-b from-pink-100 to-white mx-4 sm:mx-6 md:mx-8 lg:mx-10 xl:mx-12 rounded-2xl lg:rounded-3xl shadow-lg overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {/* Section Header */}
@@ -14,12 +14,18 @@ const About = () => {
             <div className="w-20 sm:w-24 h-1.5 bg-gradient-to-r from-pink-400 to-pink-200 mx-auto rounded-full"></div>
           </div>
 
-          {/* Content with responsive side-by-side layout */}
           <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto">
-            {/* Left side - Image placeholder */}
-            <div className="w-full lg:w-1/2 rounded-xl md:rounded-2xl overflow-hidden shadow-lg md:shadow-xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-300">
-              <div className="bg-gradient-to-br from-pink-100 to-pink-300 h-64 sm:h-80 md:h-96 flex items-center justify-center">
-                <span className="text-6xl md:text-7xl">🎂</span> {/* Replace with actual image */}
+            {/* Left side - Founder Image with improved styling */}
+            <div className="w-full lg:w-1/2 h-full flex items-center justify-center">
+              <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-xl md:rounded-2xl overflow-hidden shadow-lg md:shadow-xl border-4 border-white transform hover:scale-[1.01] transition-transform duration-300">
+                <img 
+                  src={FounderImage} 
+                  alt="Founder of Karur Surprise Planners" 
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  style={{
+                    objectPosition: 'center top' /* Adjust as needed: 'center center', 'top', 'bottom' */
+                  }}
+                />
               </div>
             </div>
 
